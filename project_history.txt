@@ -1,0 +1,141 @@
+    1  date
+    2  df .
+    3  id
+    4  umask
+    5  pwd
+    6  ls
+    7  ls -dZ .
+    8  pwd
+    9  touch file1
+   10  ls -i file1
+   11  debugfs -R 'stat <1584>'
+   12  cat > file1 Hello
+   13  cat > file1
+   14  cat file1
+   15  \rm file1
+   16  pwd
+   17  ls
+   18  touch file1
+   19  ls -l file1
+   20  ls -l /etc/passwd
+   21  rm file1
+   22  ls
+   23  grep 'bash$' /etc/passwd | while IFS=: read user passwd uid gid name homedir shell; do     printf "%16s: %s\n";         User             "$user";         Password         "$passwd";         "User ID"        "$uid";         "Group ID"       "$gid";         Name             "$name";         "Home directory" "$homedir";         Shell            "$shell";     read < /dev/tty; done
+   24  stat
+   25  sudo i
+   26  pstree
+   27  ps
+   28  cat /proc/$$/status
+   29  id
+   30  history
+   31  cat /proc/filesystems
+   32  df
+   33  id
+   34  sudo groupadd project
+   35  sudo useradd -u 5501 -g project user1
+   36  sudo useradd -u 5502 -g project user2
+   37  sudo useradd -u 5503 -g project user3
+   38  sudo groupadd -g 4444 curators
+   39  sudo useradd -G curators curator1
+   40  sudo useradd -G curators curator2
+   41  sudo mkdir /home/dir-m2551089
+   42  sudo chown :project /home/dir-m2551089
+   43  sudo chmod 2770 /home/dir-m2551089
+   44  sudo setfacl -m g:curators:rx /home/dir-m2551089
+   45  history
+   46  sudo cat /etc/passwd
+   47  sudo cat /etc/group
+   48  sudo -u user1 touch /home/dir-m2551089/user1.txt
+   49  pwd
+   50  sudo -u user1 pwd
+   51  sudo su - user1
+   52  sudo -u curator1 ls -la /home/dir-m2551089
+   53  sudo -u curator1 touch /home/dir-m2551089/curator_test.txt 2>&1 | grep -q "Permission denied" && echo "Куратор не может писать - OK"
+   54  sudo -u stranger ls /home/dir-m2551089 2>&1 | grep -q "Permission denied" && echo "Посторонний не видит - OK"
+   55  sudo -u curator1 touch /home/dir-m2551089/curator_test.txt
+   56  sudo -u curator1 ls -la /home/dir-m2551089
+   57  sudo -u roman ls /home/dir-m2551089
+   58  ip
+   59  ip a
+   60  ping ya.ru
+   61  tracepath ya.ru
+   62  ping ya.ru
+   63  sudo dnf install -y git
+   64  ip link show
+   65  nmcli con show
+   66  sudo nmcli con mod "enp0s1" ipv4.addresses 192.168.1.100/24
+   67  cd ~
+   68  pwd
+   69  sudo nmcli con mod "Проводное подключение 1" ipv4.addresses 192.168.1.100/24
+   70  sudo nmcli con mod "Проводное подключение 1" ipv4.gateway 192.168.1.1
+   71  sudo nmcli con mod "Проводное подключение 1" ipv4.dns "8.8.8.8"
+   72  sudo nmcli con mod "Проводное подключение 1" ipv4.method manual
+   73  sudo nmcli con down "Проводное подключение 1" && sudo nmcli con up "Проводное подключение 1"
+   74  history
+   75  sudo nmcli con mod "Проводное подключение 1" ipv4.method auto
+   76  sudo nmcli con down "Проводное подключение 1" && sudo nmcli con up "Проводное подключение 1"
+   77  ip addr show enp0s1
+   78  ping -c 4 8.8.8.8
+   79  history
+   80  ip addr show enp0s1
+   81  ping -c 2 8.8.8.8
+   82  history
+   83  sudo hostnamectl set-hostname mephi-2026.domain.local
+   84  exec bash
+   85  ping -c 4 8.8.8.8 | sudo tee /tmp/network_check.txt
+   86  ping -c 4 192.168.1.1 | sudo tee -a /tmp/network_check.txt
+   87  ls -la /tmp/network_check.txt
+   88  cat /tmp/network_check.txt
+   89  sudo dnf install -y nginx tcpdump libcap-ng-utils
+   90  cd /tmp
+   91  sudo dnf download tcpdump
+   92  sudo rpm -ivh tcpdump-*.rpm
+   93  cd ~
+   94  pwd
+   95  lsblk
+   96  sudo shutdown -h now
+   97  history
+   98  lsblk
+   99  echo -e "n\np\n1\n\n\nw" | sudo fdisk /dev/vdb
+  100  sudo mkfs.ext4 -L MEPHI_DATA /dev/vdb1
+  101  sudo mkdir -p /data/mephi-web
+  102  echo "LABEL=MEPHI_DATA /data/mephi-web ext4 defaults 0 2" | sudo tee -a /etc/fstab
+  103  sudo mount -a
+  104  sudo systemctl daemon-reload
+  105  sudo mount -a
+  106  df -h | grep mephi
+  107  sudo systemctl enable --now nginx
+  108  sudo systemctl status nginx
+  109  sudo journalctl -u nginx --since "5 minutes ago" > /tmp/nginx_recent_logs.txt
+  110  sudo groupadd mephi-devs
+  111  sudo useradd -G mephi-devs mephi-admin
+  112  echo "P@ssw0rd2026" | sudo passwd --stdin mephi-admin
+  113  sudo chown mephi-admin:mephi-devs /data/mephi-web
+  114  sudo chmod 2775 /data/mephi-web
+  115  ls -ld /data/mephi-web
+  116  getenforce
+  117  sudo dnf install -y policycoreutils-python-utils
+  118  sudo semanage fcontext -a -t httpd_sys_content_t "/data/mephi-web(/.*)?"
+  119  sudo restorecon -Rv /data/mephi-web
+  120  ls -Z /data/mephi-web
+  121  ls -l /usr/sbin/tcpdump
+  122  sudo chmod u-s /usr/sbin/tcpdump
+  123  sudo setcap cap_net_raw,cap_net_admin+ep /usr/sbin/tcpdump
+  124  sudo getcap /usr/sbin/tcpdump
+  125  sudo -u mephi-admin tcpdump --help 2>&1 | head -5
+  126  echo "root" | sudo tee /etc/denied_users
+  127  echo "auth required pam_listfile.so onerr=fail item=user sense=deny file=/etc/denied_users" | sudo tee -a /etc/pam.d/system-auth
+  128  echo "auth required pam_listfile.so onerr=fail item=user sense=deny file=/etc/denied_users" | sudo tee -a /etc/pam.d/sshd
+  129  sudo su - mephi-admin -c 'echo "Hello from Student: m2551089" > /data/mephi-web/index.html'
+  130  cat /data/mephi-web/index.html
+  131  curl http://localhost
+  132  curl http://192.168.1.100
+  133  sudo nano /etc/nginx/nginx.conf
+  134  sudo nginx -t
+  135  sudo nano /etc/nginx/nginx.conf
+  136  sudo nginx -t
+  137  sudo systemctl restart nginx
+  138  curl http://192.168.1.100
+  139  cd ~
+  140  pwd
+  141  history > ~/project_history.txt
